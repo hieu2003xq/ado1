@@ -1,0 +1,41 @@
+﻿@model List<ado.net.Models.SP>
+@{
+
+    ViewBag.Title = "Xem Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- Mirrored from www.multipurposethemes.com/admin/eduadmin-template/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 17 Nov 2020 01:38:19 GMT -->
+
+
+
+            <div class="container-full">
+                <div class="container">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-3 col-sm-6">
+                                <div class="single-shop-product" style="margin-top:150px">
+                                    <div class="product-upper">
+                                        <img src="~/img/@item.hinhAnh" alt="" style="height:60px;right:40px">
+                                    </div>
+                                    <h5 style="padding-left:-100px"><a href="">@Html.Raw(item.tenSP)</a></h5>
+                                    <div class="product-carousel-price">
+                                        <ins>@item.giaBan</ins>
+                                    </div>   
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        
+
+        
+       
+
+       
+
+

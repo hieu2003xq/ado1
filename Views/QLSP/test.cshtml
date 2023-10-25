@@ -1,0 +1,133 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>thu</title>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/skin_color.css">
+    <link href="~/Content/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+
+    <link href="~/Content/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+
+
+<body>
+
+    <div>
+        <a href="@Url.Action("Index", "QLSP")">Back to List</a>
+        <table id="tb1">
+            <thead>
+                <tr>
+
+                    <th>Mã Sản Phẩm</th>
+                    <th>tenSP</th>
+                    <th>giaBan</th>
+                    <th>hinhAnh</th>
+                    <th>x</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+
+
+        </table>
+        <script src="~/Scripts/jquery-3.7.0.js"></script>
+        <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+        <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+
+        <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+        <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+        <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+
+      <!--  <script>
+            $(document).ready(function () {
+                $('#tb1').DataTable({
+                    "processing": "true",
+                    "serverSide": "true",
+
+                    "ajax": {
+                        "url": "/QLSP/getList",
+                        "type": "POST",
+                        "datatype": "json",
+                    },
+                    "columns": [
+                        { "data": "maSP" },
+                        { "data": "tenSP" },
+                        { "data": "giaBan" },
+                        { "data": "hinhAnh" },
+                      
+
+                    ],
+                });
+
+            });
+
+        </script>
+          -->
+        <script>
+            $(function () {
+                var table = $("#tb1").DataTable({
+                    "processing": "true",
+                    "serverSide": "true",
+
+                    "ajax": {
+                        "url": "/QLSP/getList",
+                        "type": "POST",
+                        "datatype": "json",
+                    },
+                    "columns": [
+                        { "data": "maSP" },
+                        { "data": "tenSP" },
+                        { "data": "giaBan" },
+                        {
+                            data:"hinhAnh",
+                            "render": function (data, type, row, meta) {
+                                return "<img src='/img/" + row.hinhAnh + "' >"
+                        }
+                        },
+                        {
+                            "data": "null",
+                            "render": function (data, type, row, meta) {
+
+                                return "<div><a class='edit' data-id='" + row.maSP + "' href='#'>Sửa</a><a class='xoa' data-id='" + row.maSP + "' href='#'>Xoá</a></div>";
+                               
+                            },
+                            
+                        } 
+                       
+
+
+                    ],
+                })
+                $(document).on("click", "#tb1 .xoa", function (e) {
+                    e.preventDefault();
+                    if (confirm("Bạn có muốn xoá không")) {
+
+
+                        var maSP = $(this).data("maSP");
+                        window.location = "/QLSP/xoa/" + $(this).data("maSP");
+                    }
+                })
+
+               
+            })
+        </script>
+    </div>
+</body>
+</html>
+
